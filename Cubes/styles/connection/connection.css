@@ -1,5 +1,10 @@
+#connection {
+  background: white;
+  border: medium solid black;
+  padding: 10px;
+}
 
-div {
+#connection, div.line {
   margin: auto;
 }
 
