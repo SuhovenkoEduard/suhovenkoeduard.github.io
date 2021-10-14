@@ -1,32 +1,13 @@
 import ServerProvider from "./scripts/server/server.js";
 import LocalProvider from "./scripts/local/local.js";
 import StyleSetter from "./scripts/styleSetter/styleSetter.js";
+import store from "./scripts/data/store.js";
 
-import {randomOrgUrl, methodName, apiKey} from "./scripts/data/randomOrg.js";
-
-const MINVALUE = 1;
-const MAXVALUE = 6;
-const CUBESCOUNTER = 2;
-const TIMEOUT = 500;
-const resultStylesPath = 'styles/result/configurations/';
-
-const COLORS = {
-  red: 'red',
-  yellow: 'yellow',
-  green: 'green',
-  black: 'black',
-  white: 'white'
-};
-
-const CONFIGURATIONS = {
-  white: 'white',
-  black: 'black'
-}
 
 // data providers
-const styleSetter = new StyleSetter(resultStylesPath);
-const serverProvider = new ServerProvider(randomOrgUrl, methodName, apiKey);
-const localProvider = new LocalProvider(TIMEOUT);
+const styleSetter = new StyleSetter(store.params.resultStylesPath);
+const serverProvider = new ServerProvider(store.random);
+const localProvider = new LocalProvider(store.params.timeout);
 let currentProvider = serverProvider;
 
 // html elements
@@ -38,37 +19,42 @@ const resultTextDiv = document.querySelector("#text");
 
 // listeners
 button.addEventListener('click', async (event) => {
-  if (body.style.background === COLORS.yellow) {
+  if (body.style.background === store.styles.colors.yellow) {
     event.preventDefault();
     return;
   }
 
-  styleSetter.setBackgroundColor(body, COLORS.yellow);
+  styleSetter.setBackgroundColor(body, store.styles.colors.yellow);
   try {
-    let randoms = await currentProvider.getRandomIntegers(MINVALUE, MAXVALUE, CUBESCOUNTER);
-    styleSetter.setBackgroundColor(body, COLORS.green);
+    let randoms = await currentProvider.getRandomIntegers(
+      store.params.minvalue,
+      store.params.maxvalue,
+      store.params.cubesCounter
+    );
+
+    styleSetter.setBackgroundColor(body, store.styles.colors.green);
     resultTextDiv.innerHTML = randoms;
   } catch (error) {
-    styleSetter.setBackgroundColor(body, COLORS.red);
+    styleSetter.setBackgroundColor(body, store.styles.colors.red);
     console.log(error);
   }
 });
 
 changeSource.addEventListener('click', (event) => {
-  if (body.style.background === COLORS.yellow) {
+  if (body.style.background === store.styles.colors.yellow) {
     event.preventDefault();
     return;
   }
 
   if (changeSource.checked) {
     currentProvider = localProvider;
-    styleSetter.setLinkHref(configurationLink, CONFIGURATIONS.black);
+    styleSetter.setLinkHref(configurationLink, store.styles.configurations.black);
   } else {
     currentProvider = serverProvider;
-    styleSetter.setLinkHref(configurationLink, CONFIGURATIONS.white);
+    styleSetter.setLinkHref(configurationLink, store.styles.configurations.white);
   }
 });
 
 // initialization
-styleSetter.setBackgroundColor(body, COLORS.green);
-styleSetter.setLinkHref(configurationLink, CONFIGURATIONS.white);
+styleSetter.setBackgroundColor(body, store.styles.colors.green);
+styleSetter.setLinkHref(configurationLink, store.styles.configurations.white);

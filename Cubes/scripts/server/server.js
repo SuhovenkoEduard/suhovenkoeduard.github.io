@@ -1,8 +1,8 @@
 export default class ServerProvider {
-  constructor(randomOrgUrl, methodName, apiKey, id=86369) {
-    this.randomOrgUrl = randomOrgUrl;
-    this.methodName = methodName;
-    this.apiKey = apiKey;
+  constructor(randomOrgStorage, id=86369) {
+    this.randomOrgUrl = randomOrgStorage.randomOrgUrl;
+    this.methodName = randomOrgStorage.methodName;
+    this.apiKey = randomOrgStorage.apiKey;
     this.id = id;
   }
 
