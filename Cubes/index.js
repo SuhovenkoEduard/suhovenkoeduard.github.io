@@ -1,5 +1,6 @@
 import ServerProvider from "./scripts/server/server.js";
 import LocalProvider from "./scripts/local/local.js";
+import StyleSetter from "./scripts/styleSetter/styleSetter.js";
 
 const MINVALUE = 1;
 const MAXVALUE = 6;
@@ -16,8 +17,8 @@ const COLORS = {
 };
 
 const CONFIGURATIONS = {
-  white: 'styles/result/configurations/white.css',
-  black: 'styles/result/configurations/black.css'
+  whiteHref: 'styles/result/configurations/white.css',
+  blackHref: 'styles/result/configurations/black.css'
 }
 
 // random org constants
@@ -25,55 +26,49 @@ const randomOrgUrl = 'https://api.random.org/json-rpc/4/invoke';
 const methodName = 'generateSignedIntegers';
 const apiKey = '5c5ca4c7-aa19-440c-b885-5f0b0ba44711';
 
+const styleReducer = new StyleSetter();
 const serverProvider = new ServerProvider(randomOrgUrl, methodName, apiKey);
 const localProvider = new LocalProvider(TIMEOUT);
-
-let configurationLink = document.querySelector('#configurationLink');
-let button = document.querySelector("#nextRandomButton");
-let changeSource = document.querySelector("#changeSource");
-let resultTextDiv = document.querySelector("#text");
 let currentProvider = serverProvider;
 
-const setBackgroundColor = (color) => {
-  document.body.style.background = color;
-};
-
-const setStyleConfiguration = (element, configuration) => {
-  element.href = configuration;
-};
+const body = document.body;
+const configurationLink = document.querySelector('#configurationLink');
+const button = document.querySelector("#nextRandomButton");
+const changeSource = document.querySelector("#changeSource");
+const resultTextDiv = document.querySelector("#text");
 
 button.addEventListener('click', async (event) => {
-  if (document.body.style.background === COLORS.yellow) {
+  if (body.style.background === COLORS.yellow) {
     event.preventDefault();
     return;
   }
 
-  setBackgroundColor(COLORS.yellow);
+  styleReducer.setBackgroundColor(body, COLORS.yellow);
   try {
     let randoms = await currentProvider.getRandomIntegers(MINVALUE, MAXVALUE, CUBESCOUNTER);
-    setBackgroundColor(COLORS.green);
+    styleReducer.setBackgroundColor(body, COLORS.green);
     resultTextDiv.innerHTML = randoms;
   } catch (error) {
-    setBackgroundColor(COLORS.red);
+    styleReducer.setBackgroundColor(body, COLORS.red);
     console.log(error);
   }
 });
 
 changeSource.onclick = (event) => {
-  if (document.body.style.background === COLORS.yellow) {
+  if (body.style.background === COLORS.yellow) {
     event.preventDefault();
     return;
   }
 
   if (changeSource.checked) {
     currentProvider = localProvider;
-    setStyleConfiguration(configurationLink, CONFIGURATIONS.black);
+    styleReducer.setLinkHref(configurationLink, CONFIGURATIONS.blackHref);
   } else {
     currentProvider = serverProvider;
-    setStyleConfiguration(configurationLink, CONFIGURATIONS.white);
+    styleReducer.setLinkHref(configurationLink, CONFIGURATIONS.whiteHref);
   }
 };
 
 // initialization
-setBackgroundColor(COLORS.green);
-setStyleConfiguration(configurationLink, CONFIGURATIONS.white);
+styleReducer.setBackgroundColor(body, COLORS.green);
+styleReducer.setLinkHref(configurationLink, CONFIGURATIONS.whiteHref);
