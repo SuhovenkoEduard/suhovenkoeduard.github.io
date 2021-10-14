@@ -1,13 +1,11 @@
-import ServerProvider from "./scripts/server/server.js";
-import LocalProvider from "./scripts/local/local.js";
-import StyleSetter from "./scripts/styleSetter/styleSetter.js";
-import store from "./scripts/data/store.js";
+import StyleSetter from "./scripts/logic/styleSetter/styleSetter.js";
+import providers from "./scripts/logic/providers/providers.js";
+import store from "./scripts/store/store.js";
 
-
-// data providers
+// store providers
 const styleSetter = new StyleSetter(store.params.resultStylesPath);
-const serverProvider = new ServerProvider(store.random);
-const localProvider = new LocalProvider(store.params.timeout);
+const serverProvider = new providers.server(store.random);
+const localProvider = new providers.local(store.params.timeout);
 let currentProvider = serverProvider;
 
 // html elements
@@ -25,6 +23,11 @@ pushButton.addEventListener('click', async (event) => {
     return;
   }
 
+  if (store.params.canceled) {
+    store.params.canceled = false;
+    return;
+  }
+
   styleSetter.setBackgroundColor(body, store.styles.colors.yellow);
   try {
     let randoms = await currentProvider.getRandomIntegers(
@@ -32,11 +35,6 @@ pushButton.addEventListener('click', async (event) => {
       store.params.maxvalue,
       store.params.cubesCounter
     );
-
-    if (store.params.canceled) {
-      store.params.canceled = false;
-      return;
-    }
 
     styleSetter.setBackgroundColor(body, store.styles.colors.green);
     resultTextDiv.innerHTML = randoms;
@@ -48,7 +46,7 @@ pushButton.addEventListener('click', async (event) => {
 
 cancelButton.addEventListener('click', (event) => {
   store.params.canceled = true;
-  styleSetter.setBackgroundColor(body, store.styles.colors.green);
+  styleSetter.setBackgroundColor(body, store.styles.colors.orange);
 });
 
 changeSource.addEventListener('click', (event) => {
