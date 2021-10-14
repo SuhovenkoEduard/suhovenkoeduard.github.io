@@ -47,11 +47,11 @@ changeSource.addEventListener('click', (event) => {
   }
 
   if (changeSource.checked) {
-    currentProvider = localProvider;
-    styleSetter.setLinkHref(configurationLink, store.styles.configurations.black);
-  } else {
     currentProvider = serverProvider;
     styleSetter.setLinkHref(configurationLink, store.styles.configurations.white);
+  } else {
+    currentProvider = localProvider;
+    styleSetter.setLinkHref(configurationLink, store.styles.configurations.black);
   }
 });
 
