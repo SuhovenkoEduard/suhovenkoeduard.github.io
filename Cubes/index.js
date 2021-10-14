@@ -26,17 +26,20 @@ const randomOrgUrl = 'https://api.random.org/json-rpc/4/invoke';
 const methodName = 'generateSignedIntegers';
 const apiKey = '5c5ca4c7-aa19-440c-b885-5f0b0ba44711';
 
+// data providers
 const styleReducer = new StyleSetter();
 const serverProvider = new ServerProvider(randomOrgUrl, methodName, apiKey);
 const localProvider = new LocalProvider(TIMEOUT);
 let currentProvider = serverProvider;
 
+// html elements
 const body = document.body;
 const configurationLink = document.querySelector('#configurationLink');
 const button = document.querySelector("#nextRandomButton");
 const changeSource = document.querySelector("#changeSource");
 const resultTextDiv = document.querySelector("#text");
 
+// listeners
 button.addEventListener('click', async (event) => {
   if (body.style.background === COLORS.yellow) {
     event.preventDefault();
@@ -54,7 +57,7 @@ button.addEventListener('click', async (event) => {
   }
 });
 
-changeSource.onclick = (event) => {
+changeSource.addEventListener('onclick', (event) => {
   if (body.style.background === COLORS.yellow) {
     event.preventDefault();
     return;
@@ -67,7 +70,7 @@ changeSource.onclick = (event) => {
     currentProvider = serverProvider;
     styleReducer.setLinkHref(configurationLink, CONFIGURATIONS.whiteHref);
   }
-};
+});
 
 // initialization
 styleReducer.setBackgroundColor(body, COLORS.green);
