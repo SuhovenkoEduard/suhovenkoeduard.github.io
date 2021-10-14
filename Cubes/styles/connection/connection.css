@@ -1,4 +1,5 @@
 #connection {
+  display: grid;
   background: white;
   border: medium solid black;
   padding: 10px;

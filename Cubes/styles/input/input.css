@@ -1,5 +1,11 @@
-#input #nextRandomButton {
+#input {
+  display: flex;
+  flex-direction: column;
   margin: auto;
+}
+
+#input .button {
+  margin: 5% auto;
   font-size: xx-large;
   padding: 10px;
   background: white;

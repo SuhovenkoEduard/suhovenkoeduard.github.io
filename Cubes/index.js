@@ -13,12 +13,13 @@ let currentProvider = serverProvider;
 // html elements
 const body = document.body;
 const configurationLink = document.querySelector('#configurationLink');
-const button = document.querySelector("#nextRandomButton");
+const pushButton = document.querySelector(".button.push");
+const cancelButton = document.querySelector(".button.cancel")
 const changeSource = document.querySelector("#changeSource");
 const resultTextDiv = document.querySelector("#text");
 
 // listeners
-button.addEventListener('click', async (event) => {
+pushButton.addEventListener('click', async (event) => {
   if (body.style.background === store.styles.colors.yellow) {
     event.preventDefault();
     return;
@@ -32,12 +33,22 @@ button.addEventListener('click', async (event) => {
       store.params.cubesCounter
     );
 
+    if (store.params.canceled) {
+      store.params.canceled = false;
+      return;
+    }
+
     styleSetter.setBackgroundColor(body, store.styles.colors.green);
     resultTextDiv.innerHTML = randoms;
   } catch (error) {
     styleSetter.setBackgroundColor(body, store.styles.colors.red);
     console.log(error);
   }
+});
+
+cancelButton.addEventListener('click', (event) => {
+  store.params.canceled = true;
+  styleSetter.setBackgroundColor(body, store.styles.colors.green);
 });
 
 changeSource.addEventListener('click', (event) => {

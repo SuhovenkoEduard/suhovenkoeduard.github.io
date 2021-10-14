@@ -23,15 +23,12 @@ div.container {
 
 #result {
   grid-area: result;
-  display: grid;
 }
 
 #connection {
   grid-area: connection;
-  display: grid;
 }
 
 #input {
   grid-area: input;
-  display: grid
 }

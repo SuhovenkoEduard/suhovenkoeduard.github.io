@@ -1,3 +1,7 @@
+#result {
+  display: grid;
+}
+
 #text {
   margin: auto;
   font-size: 160pt;
