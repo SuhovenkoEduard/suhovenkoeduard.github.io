@@ -48,7 +48,7 @@ pushButton.addEventListener('click', async (event) => {
 
 cancelButton.addEventListener('click', (event) => {
   store.params.canceled = true;
-  styleSetter.setBackgroundColor(body, store.styles.colors.green);
+  styleSetter.setBackgroundColor(body, store.styles.colors.red);
 });
 
 changeSource.addEventListener('click', (event) => {
