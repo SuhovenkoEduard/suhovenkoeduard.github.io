@@ -3,7 +3,8 @@ const colors = {
   yellow: 'yellow',
   green: 'green',
   black: 'black',
-  white: 'white'
+  white: 'white',
+  orange: 'orange'
 };
 
 const configurations = {
