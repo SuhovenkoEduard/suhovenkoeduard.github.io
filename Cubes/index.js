@@ -2,32 +2,29 @@ import ServerProvider from "./scripts/server/server.js";
 import LocalProvider from "./scripts/local/local.js";
 import StyleSetter from "./scripts/styleSetter/styleSetter.js";
 
+import {randomOrgUrl, methodName, apiKey} from "./scripts/data/randomOrg.js";
+
 const MINVALUE = 1;
 const MAXVALUE = 6;
 const CUBESCOUNTER = 2;
 const TIMEOUT = 500;
+const resultStylesPath = 'styles/result/configurations/';
 
 const COLORS = {
   red: 'red',
   yellow: 'yellow',
   green: 'green',
-  purple: 'purple',
   black: 'black',
   white: 'white'
 };
 
 const CONFIGURATIONS = {
-  whiteHref: 'styles/result/configurations/white.css',
-  blackHref: 'styles/result/configurations/black.css'
+  white: 'white',
+  black: 'black'
 }
 
-// random org constants
-const randomOrgUrl = 'https://api.random.org/json-rpc/4/invoke';
-const methodName = 'generateSignedIntegers';
-const apiKey = '5c5ca4c7-aa19-440c-b885-5f0b0ba44711';
-
 // data providers
-const styleReducer = new StyleSetter();
+const styleSetter = new StyleSetter(resultStylesPath);
 const serverProvider = new ServerProvider(randomOrgUrl, methodName, apiKey);
 const localProvider = new LocalProvider(TIMEOUT);
 let currentProvider = serverProvider;
@@ -46,18 +43,18 @@ button.addEventListener('click', async (event) => {
     return;
   }
 
-  styleReducer.setBackgroundColor(body, COLORS.yellow);
+  styleSetter.setBackgroundColor(body, COLORS.yellow);
   try {
     let randoms = await currentProvider.getRandomIntegers(MINVALUE, MAXVALUE, CUBESCOUNTER);
-    styleReducer.setBackgroundColor(body, COLORS.green);
+    styleSetter.setBackgroundColor(body, COLORS.green);
     resultTextDiv.innerHTML = randoms;
   } catch (error) {
-    styleReducer.setBackgroundColor(body, COLORS.red);
+    styleSetter.setBackgroundColor(body, COLORS.red);
     console.log(error);
   }
 });
 
-changeSource.addEventListener('onclick', (event) => {
+changeSource.addEventListener('click', (event) => {
   if (body.style.background === COLORS.yellow) {
     event.preventDefault();
     return;
@@ -65,13 +62,13 @@ changeSource.addEventListener('onclick', (event) => {
 
   if (changeSource.checked) {
     currentProvider = localProvider;
-    styleReducer.setLinkHref(configurationLink, CONFIGURATIONS.blackHref);
+    styleSetter.setLinkHref(configurationLink, CONFIGURATIONS.black);
   } else {
     currentProvider = serverProvider;
-    styleReducer.setLinkHref(configurationLink, CONFIGURATIONS.whiteHref);
+    styleSetter.setLinkHref(configurationLink, CONFIGURATIONS.white);
   }
 });
 
 // initialization
-styleReducer.setBackgroundColor(body, COLORS.green);
-styleReducer.setLinkHref(configurationLink, CONFIGURATIONS.whiteHref);
+styleSetter.setBackgroundColor(body, COLORS.green);
+styleSetter.setLinkHref(configurationLink, CONFIGURATIONS.white);
