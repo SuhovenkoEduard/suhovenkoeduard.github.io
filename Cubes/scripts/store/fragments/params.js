@@ -1,7 +1,7 @@
 const minvalue = 1;
 const maxvalue = 6;
 const cubesCounter = 2;
-const timeout = 1000;
+const timeout = 650;
 const resultStylesPath = 'styles/result/configurations/';
 let started = false;
 
