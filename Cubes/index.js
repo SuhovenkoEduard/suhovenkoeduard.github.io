@@ -11,9 +11,7 @@ import htmlElements from "./scripts/logic/html/html.js";
 const styleSetter = new StyleSetter(store.params.resultStylesPath);
 const serverProvider = new providers.server(store.random);
 const localProvider = new providers.local(store.params.timeout);
-const currentProvider = {
-  value: serverProvider
-};
+const currentProvider = { value: serverProvider };
 
 // listeners
 const pushButtonListener = new listeners.Push(
