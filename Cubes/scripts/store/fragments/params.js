@@ -1,9 +1,9 @@
 const minvalue = 1;
 const maxvalue = 6;
 const cubesCounter = 2;
-const timeout = 500;
+const timeout = 300;
 const resultStylesPath = 'styles/result/configurations/';
-let canceled = false;
+let started = false;
 
 const params = {
   minvalue,
@@ -11,7 +11,7 @@ const params = {
   cubesCounter,
   timeout,
   resultStylesPath,
-  canceled
+  started
 };
 
 export default params;

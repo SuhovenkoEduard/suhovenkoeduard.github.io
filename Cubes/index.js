@@ -1,69 +1,50 @@
+// data imports
+import store from "./scripts/store/store.js";
+
+// logic imports
 import StyleSetter from "./scripts/logic/styleSetter/styleSetter.js";
 import providers from "./scripts/logic/providers/providers.js";
-import store from "./scripts/store/store.js";
+import listeners from "./scripts/logic/listeners/listeners.js";
+import htmlElements from "./scripts/logic/html/html.js";
 
 // store providers
 const styleSetter = new StyleSetter(store.params.resultStylesPath);
 const serverProvider = new providers.server(store.random);
 const localProvider = new providers.local(store.params.timeout);
-let currentProvider = serverProvider;
-
-// html elements
-const body = document.body;
-const configurationLink = document.querySelector('#configurationLink');
-const pushButton = document.querySelector(".button.push");
-const cancelButton = document.querySelector(".button.cancel")
-const changeSource = document.querySelector("#changeSource");
-const resultTextDiv = document.querySelector("#text");
+const currentProvider = {
+  value: serverProvider
+};
 
 // listeners
-pushButton.addEventListener('click', async (event) => {
-  if (body.style.background === store.styles.colors.yellow) {
-    event.preventDefault();
-    return;
-  }
+const pushButtonListener = new listeners.Push(
+  htmlElements,
+  store,
+  styleSetter,
+  currentProvider
+);
+const cancelButtonListener = new listeners.Cancel(
+  store,
+  htmlElements,
+  styleSetter
+);
+const changeSourceListener = new listeners.ChangeSource(
+  htmlElements,
+  store,
+  currentProvider,
+  serverProvider,
+  localProvider,
+  styleSetter
+);
 
-  if (store.params.canceled) {
-    store.params.canceled = false;
-    return;
-  }
+const inputs = [
+  { element: htmlElements.pushButton, listener: pushButtonListener.click.bind(pushButtonListener) },
+  { element: htmlElements.cancelButton, listener: cancelButtonListener.click.bind(cancelButtonListener) },
+  { element: htmlElements.changeSource, listener: changeSourceListener.click.bind(changeSourceListener) }
+];
 
-  styleSetter.setBackgroundColor(body, store.styles.colors.yellow);
-  try {
-    let randoms = await currentProvider.getRandomIntegers(
-      store.params.minvalue,
-      store.params.maxvalue,
-      store.params.cubesCounter
-    );
-
-    styleSetter.setBackgroundColor(body, store.styles.colors.green);
-    resultTextDiv.innerHTML = randoms;
-  } catch (error) {
-    styleSetter.setBackgroundColor(body, store.styles.colors.red);
-    console.log(error);
-  }
-});
-
-cancelButton.addEventListener('click', (event) => {
-  store.params.canceled = true;
-  styleSetter.setBackgroundColor(body, store.styles.colors.orange);
-});
-
-changeSource.addEventListener('click', (event) => {
-  if (body.style.background === store.styles.colors.yellow) {
-    event.preventDefault();
-    return;
-  }
-
-  if (changeSource.checked) {
-    currentProvider = serverProvider;
-    styleSetter.setLinkHref(configurationLink, store.styles.configurations.white);
-  } else {
-    currentProvider = localProvider;
-    styleSetter.setLinkHref(configurationLink, store.styles.configurations.black);
-  }
-});
+// add listeners
+inputs.forEach(input => input.element.onclick = input.listener);
 
 // initialization
-styleSetter.setBackgroundColor(body, store.styles.colors.green);
-styleSetter.setLinkHref(configurationLink, store.styles.configurations.white);
+styleSetter.setBackgroundColor(htmlElements.body, store.styles.colors.green);
+styleSetter.setLinkHref(htmlElements.configurationLink, store.styles.configurations.white);
