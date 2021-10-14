@@ -3,14 +3,17 @@
 <head>
   <meta charset="utf-8">
   <title></title>
-  <link href="styles.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="index.css"/>
+  <link rel="stylesheet"
+        href="styles/result/configurations/white.css"
+        id="configurationLink">
 </head>
 <body>
 <div class="container">
-  <div id="resultDiv">
-    <div id="resultText">0,0</div>
+  <div id="result">
+    <div id="text">0,0</div>
   </div>
-  <div id="connectionDiv">
+  <div id="connection">
     <div>
       <label for="changeSource"
              id="sourceLabel"> Отключиться от сервера </label>
@@ -22,10 +25,10 @@
       </label>
     </div>
   </div>
-  <div id="inputDiv">
+  <div id="input">
     <button id="nextRandomButton"> Нажми меня нежно</button>
   </div>
 </div>
-<script src="main.js"></script>
+<script type="module" src="index.js"></script>
 </body>
 </html>
