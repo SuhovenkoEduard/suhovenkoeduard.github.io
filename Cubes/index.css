@@ -19,6 +19,7 @@ div.container {
             "result"
             "connection"
             "input";
+  grid-gap: 20px;
 }
 
 #result {
