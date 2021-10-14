@@ -24,12 +24,13 @@ export default class PushButtonListener {
         return;
       }
 
-      this.store.params.started = false;
       this.styleSetter.setBackgroundColor(this.htmlElements.body, this.store.styles.colors.green);
       this.htmlElements.resultTextDiv.innerHTML = randoms;
     } catch (error) {
       this.styleSetter.setBackgroundColor(this.htmlElements.body, this.store.styles.colors.red);
       console.log(error);
     }
+
+    this.store.params.started = false;
   }
 }
