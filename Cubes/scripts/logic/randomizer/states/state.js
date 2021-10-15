@@ -5,32 +5,18 @@ class State {
     this.randomizer = randomizer;
   }
 
-  changeResult(randoms) {
-    State.throwNotImplementedException();
-  }
+  changeResult(randoms) { }
 
-  showError(error) {
-    State.throwNotImplementedException();
-  }
+  showError(error) { }
 
-  clickPush(event) {
-    State.throwNotImplementedException();
-  }
+  clickPush(event) { }
 
-  clickChange(event) {
-    State.throwNotImplementedException();
-  }
+  clickChange(event) { }
 
-  clickCancel(event) {
-    State.throwNotImplementedException();
-  }
+  clickCancel(event) { }
 
   getName() {
     return this.name;
-  }
-
-  static throwNotImplementedException() {
-    throw new Error('Not implemented exception');
   }
 }
 

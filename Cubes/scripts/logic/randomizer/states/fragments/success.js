@@ -8,14 +8,6 @@ class Success extends State {
     super(randomizer);
   }
 
-  changeResult(randoms) {
-    // nothing
-  }
-
-  showError(error) {
-    // nothing
-  }
-
   clickPush(event) {
     this.randomizer.sendRequest();
     this.randomizer.changeState(new states.Wait(this.randomizer));
@@ -23,10 +15,6 @@ class Success extends State {
 
   clickChange(event) {
     this.randomizer.updateProvider();
-  }
-
-  clickCancel(event) {
-    // nothing
   }
 }
 

@@ -16,15 +16,6 @@ class Wait extends State {
     this.randomizer.changeState(new states.Error(this.randomizer));
   }
 
-  clickPush(event) {
-    // nothing
-  }
-
-  clickChange(event) {
-    event.preventDefault();
-    // nothing
-  }
-
   clickCancel(event) {
     this.randomizer.changeState(new states.Cancel(this.randomizer));
   }
