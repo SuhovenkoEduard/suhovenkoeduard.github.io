@@ -11,6 +11,7 @@ export default class ServerProvider {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'permissions-policy': 'interest-cohort=()' // not required
       },
       body: JSON.stringify({
         "jsonrpc": "2.0",
