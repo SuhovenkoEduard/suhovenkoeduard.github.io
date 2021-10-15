@@ -6,7 +6,7 @@ import providers from "./scripts/logic/providers/providers.js";
 import ui from "./scripts/logic/ui/ui.js";
 
 // randomizer
-import Randomizer from "./scripts/logic/Randomizer/randomizer.js";
+import Randomizer from "./scripts/logic/randomizer/randomizer.js";
 
 // store providers
 const providerInstances = {
