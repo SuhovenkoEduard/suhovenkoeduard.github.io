@@ -1,17 +1,13 @@
-const minvalue = 1;
-const maxvalue = 6;
+const minValue = 1;
+const maxValue = 6;
 const cubesCounter = 2;
-const timeout = 300;
-const resultStylesPath = 'styles/result/configurations/';
-let started = false;
+const timeout = 500;
 
 const params = {
-  minvalue,
-  maxvalue,
+  minValue,
+  maxValue,
   cubesCounter,
   timeout,
-  resultStylesPath,
-  started
 };
 
 export default params;

@@ -20,6 +20,7 @@ div.container {
             "connection"
             "input";
   grid-gap: 20px;
+  background: midnightblue;
 }
 
 #result {
