@@ -1,38 +1,63 @@
-@import 'styles/switch/switch.css';
-@import 'styles/result/result.css';
-@import 'styles/connection/connection.css';
-@import 'styles/input/input.css';
+import states from "./states/states.js";
 
-* {
-  user-select: none;
+
+class Randomizer {
+  constructor(UI, store, providers) {
+    this.UI = UI;
+    this.store = store;
+    this.providers = providers;
+    this.currentProvider = providers.external;
+    this.changeState(new states.Success(this));
+  }
+
+  async sendRequest() {
+    try {
+      let randoms = await this.currentProvider.getRandomIntegers(
+        this.store.params.minValue,
+        this.store.params.maxValue,
+        this.store.params.cubesCounter,
+      );
+
+      this.state.changeResult(randoms);
+    } catch (error) {
+      console.log(error);
+      this.state.showError(error);
+    }
+  }
+
+  changeResult(randoms) {
+    this.UI.changeResult(randoms);
+    this.changeState(new states.Success(this));
+  }
+
+  changeState(state) {
+    this.state = state;
+    this.UI.changeState(state.getName());
+    this.updateProvider();
+  }
+
+  updateProvider() {
+    let checked = this.UI.changeButton.checked;
+    let configurationName = checked? 'white' : 'black';
+
+    this.currentProvider = checked ?
+      this.providers.external : this.providers.local;
+
+    this.UI.changeConfiguration(configurationName);
+  }
+
+  // click
+  clickPush(event) {
+    this.state.clickPush(event);
+  }
+
+  clickChange(event) {
+    this.state.clickChange(event);
+  }
+
+  clickCancel(event) {
+    this.state.clickCancel(event);
+  }
 }
 
-html, body, div.container {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-div.container {
-  display: grid;
-  grid-template-rows: 100fr 5fr 100fr;
-  grid-template-columns: auto;
-  grid-template-areas:
-            "result"
-            "connection"
-            "input";
-  grid-gap: 20px;
-  background: midnightblue;
-}
-
-#result {
-  grid-area: result;
-}
-
-#connection {
-  grid-area: connection;
-}
-
-#input {
-  grid-area: input;
-}
+export default Randomizer;
