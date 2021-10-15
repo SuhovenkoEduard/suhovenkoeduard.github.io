@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Cubes</title>
+  <link rel="stylesheet" href="index.css"/>
+  <link rel="stylesheet" id="configurationLink">
+  <link rel="stylesheet" id="stateLink">
+  <link rel="stylesheet" id="sourceLabelLink">
+</head>
+<body>
+<div class="container">
+  <div id="result">
+    <div id="text">0,0</div>
+  </div>
+  <div id="connection">
+    <div class="line">
+      <label for="changeSource"
+             id="sourceLabel"></label>
+    </div>
+    <div class="line">
+      <label class="switch">
+        <input type="checkbox" id="changeSource" checked>
+        <span class="slider round"></span>
+      </label>
+    </div>
+  </div>
+  <div id="input">
+      <button class="button push">Push me softly</button>
+      <button class="button cancel">Cancel</button>
+  </div>
+</div>
+<script type="module" src="index.js"></script>
+</body>
+</html>
