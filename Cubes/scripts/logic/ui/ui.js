@@ -1,15 +1,10 @@
-const configurationsPath = 'styles/result/configurations/';
-const statesPath = 'styles/result/states/';
-const sourceLabelPath = 'styles/connection/states/';
+import links from "./links.js";
+import { ids } from "./links.js"
+
 const sourceLabels = {
   white: 'True random enabled',
   black: 'True random disabled'
 };
-
-// links
-const configurationLink = document.querySelector('#configurationLink');
-const stateLink = document.querySelector('#stateLink');
-const sourceLabelLink = document.querySelector('#sourceLabelLink');
 
 // other
 const body = document.body;
@@ -22,13 +17,10 @@ const sourceLabel = document.querySelector('#sourceLabel');
 class UI {
   constructor() {
     this.body = body;
-    this.configurationLink = configurationLink;
-    this.stateLink = stateLink;
     this.pushButton = pushButton;
     this.changeButton = changeButton;
     this.cancelButton = cancelButton;
     this.resultTextDiv = resultTextDiv;
-    this.sourceLabelLink = sourceLabelLink;
     this.sourceLabel = sourceLabel;
   }
 
@@ -37,13 +29,26 @@ class UI {
   }
 
   changeState(stateName) {
-    this.stateLink.href = statesPath + stateName + '.css';
+    if (document.getElementById(ids.states) !== null) {
+      document.getElementById(ids.states).remove();
+    }
+
+    document.head.appendChild(links.states[stateName]);
   }
 
   changeConfiguration(configurationName) {
     this.sourceLabel.innerHTML = sourceLabels[configurationName];
-    this.sourceLabelLink.href = sourceLabelPath + configurationName + '.css';
-    this.configurationLink.href = configurationsPath + configurationName + '.css';
+
+    if (document.getElementById(ids.configurations) !== null) {
+      document.getElementById(ids.configurations).remove();
+    }
+
+    if (document.getElementById(ids.sourceLabels) !== null) {
+      document.getElementById(ids.sourceLabels).remove();
+    }
+
+    document.head.appendChild(links.configurations[configurationName]);
+    document.head.appendChild(links.sourceLabels[configurationName]);
   }
 }
 
