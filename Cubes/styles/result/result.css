@@ -1,9 +1,18 @@
-#result {
+.result {
   display: grid;
+  background: goldenrod;
+  padding: 20px;
+}
+
+.resultContent {
+  display: grid;
+  border: medium solid black;
+  border-radius: 20px;
   padding: 10px;
 }
 
-#text {
+.resultContent .text {
   margin: auto;
+  border-radius: 20px;
   font-size: 160pt;
 }

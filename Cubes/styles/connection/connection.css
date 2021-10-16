@@ -1,11 +1,20 @@
-#connection {
+.connection {
+  display: grid;
+  border-top: medium solid white;
+  border-bottom: medium solid white;
+  background: darkgoldenrod;
+  padding: 20px;
+}
+
+.connectionContent {
   display: grid;
   background: white;
   border: medium solid black;
+  border-radius: 20px;
   padding: 10px;
 }
 
-#connection, div.line {
+.connectionContent, div.line {
   margin: auto;
 }
 

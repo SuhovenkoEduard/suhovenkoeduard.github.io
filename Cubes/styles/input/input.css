@@ -1,15 +1,26 @@
-#input {
+.input {
+  display: grid;
+  background: goldenrod;
+  padding: 20px;
+}
+
+.inputContent {
   display: flex;
   flex-direction: column;
   margin: auto;
   padding: 10px;
+
+  border: medium solid black;
+  border-radius: 20px;
+  background: white;
 }
 
-#input .button {
-  margin: 5% auto;
+.inputContent .button {
+  margin: 5% 0;
   font-size: xx-large;
   padding: 10px;
   background: white;
   border: medium solid black;
+  border-radius: 20px;
   cursor: pointer;
 }

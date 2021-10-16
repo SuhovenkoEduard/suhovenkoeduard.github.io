@@ -3,8 +3,8 @@ import store from "../../store/store.js";
 const pushButton = document.querySelector(".button.push");
 const cancelButton = document.querySelector(".button.cancel")
 const changeButton = document.querySelector("#changeSource");
-const resultDiv = document.querySelector('#result');
-const resultTextDiv = document.querySelector("#text");
+const resultDiv = document.querySelector('.resultContent');
+const resultTextDiv = document.querySelector(".resultContent .text");
 const sourceLabel = document.querySelector('#sourceLabel');
 
 class UI {

@@ -21,18 +21,17 @@ div.container {
             "result"
             "connection"
             "input";
-    grid-gap: 20px;
-    background: midnightblue;
+    background: gray;
 }
 
-#result {
+.result {
     grid-area: result;
 }
 
-#connection {
+.connection {
     grid-area: connection;
 }
 
-#input {
+.input {
     grid-area: input;
 }
