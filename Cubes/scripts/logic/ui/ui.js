@@ -1,12 +1,5 @@
 import store from "../../store/store.js";
 
-const sourceLabels = {
-  white: 'True random enabled',
-  black: 'True random disabled'
-};
-
-// other
-const body = document.body;
 const pushButton = document.querySelector(".button.push");
 const cancelButton = document.querySelector(".button.cancel")
 const changeButton = document.querySelector("#changeSource");
@@ -16,7 +9,6 @@ const sourceLabel = document.querySelector('#sourceLabel');
 
 class UI {
   constructor() {
-    this.body = body;
     this.pushButton = pushButton;
     this.changeButton = changeButton;
     this.cancelButton = cancelButton;
@@ -34,7 +26,7 @@ class UI {
   }
 
   changeConfiguration(configurationName) {
-    this.sourceLabel.innerHTML = sourceLabels[configurationName];
+    this.sourceLabel.innerHTML = store.styles.sourceLabelStrings[configurationName];
     this.applyStyles(this.resultTextDiv, store.styles.configurations[configurationName]);
     this.applyStyles(this.sourceLabel, store.styles.sourceLabels[configurationName]);
   }

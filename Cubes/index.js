@@ -8,10 +8,10 @@ import ui from "./scripts/logic/ui/ui.js";
 // randomizer
 import Randomizer from "./scripts/logic/randomizer/randomizer.js";
 
-// store providers
+// providers
 const providerInstances = {
-  local: new providers.local(store.params.timeout),
-  external: new providers.server(store.random)
+  local: new providers.Local(store.params.timeout),
+  server: new providers.Server(store.random)
 };
 
 const randomizer = new Randomizer(ui, store, providerInstances);

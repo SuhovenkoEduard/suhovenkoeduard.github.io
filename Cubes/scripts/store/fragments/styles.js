@@ -23,10 +23,16 @@ const sourceLabels = {
   black: { color: 'red' }
 };
 
+const sourceLabelStrings = {
+  white: 'True random enabled',
+  black: 'True random disabled'
+};
+
 const styles = {
   configurations,
   states,
-  sourceLabels
+  sourceLabels,
+  sourceLabelStrings
 };
 
 export default styles;

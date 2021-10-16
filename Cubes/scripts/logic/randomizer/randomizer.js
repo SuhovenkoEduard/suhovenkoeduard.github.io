@@ -1,12 +1,11 @@
 import states from "./states/states.js";
 
-
 class Randomizer {
   constructor(UI, store, providers) {
     this.UI = UI;
     this.store = store;
     this.providers = providers;
-    this.currentProvider = providers.external;
+    this.currentProvider = providers.server;
     this.changeState(new states.Success(this));
   }
 
@@ -39,10 +38,7 @@ class Randomizer {
   updateProvider() {
     let checked = this.UI.changeButton.checked;
     let configurationName = checked? 'white' : 'black';
-
-    this.currentProvider = checked ?
-      this.providers.external : this.providers.local;
-
+    this.currentProvider = checked ? this.providers.server : this.providers.local;
     this.UI.changeConfiguration(configurationName);
   }
 
