@@ -1,5 +1,6 @@
 #result {
   display: grid;
+  padding: 10px;
 }
 
 #text {
