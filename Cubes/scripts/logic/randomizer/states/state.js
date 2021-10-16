@@ -11,7 +11,7 @@ class State {
 
   clickPush(event) { }
 
-  clickChange(event) { }
+  clickChange(event) { event.preventDefault(); }
 
   clickCancel(event) { }
 
