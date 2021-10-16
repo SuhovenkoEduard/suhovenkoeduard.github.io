@@ -3,6 +3,10 @@
 @import 'styles/connection/connection.css';
 @import 'styles/input/input.css';
 
+@viewport {
+    orientation: portrait;
+}
+
 * {
     user-select: none;
 }
