@@ -1,20 +1,32 @@
-const colors = {
-  red: 'red',
-  yellow: 'yellow',
-  green: 'green',
-  black: 'black',
-  white: 'white',
-  orange: 'orange'
+const configurations = {
+  white: {
+    border: 'medium solid black',
+    background: 'white',
+    color: 'black'
+  },
+  black: {
+    border: 'medium solid white',
+    background: 'black',
+    color: 'white'
+  }
 };
 
-const configurations = {
-  white: 'white',
-  black: 'black'
+const states = {
+  wait: { background: 'yellow' },
+  success: { background: 'green' },
+  error: { background: 'red' },
+  cancel: { background: 'orange' }
+};
+
+const sourceLabels = {
+  white: { color: 'black' },
+  black: { color: 'red' }
 };
 
 const styles = {
-  colors,
-  configurations
+  configurations,
+  states,
+  sourceLabels
 };
 
 export default styles;

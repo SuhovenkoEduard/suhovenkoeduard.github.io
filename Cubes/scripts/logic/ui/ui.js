@@ -1,5 +1,4 @@
-import links from "./links.js";
-import { ids } from "./links.js"
+import store from "../../store/store.js";
 
 const sourceLabels = {
   white: 'True random enabled',
@@ -11,6 +10,7 @@ const body = document.body;
 const pushButton = document.querySelector(".button.push");
 const cancelButton = document.querySelector(".button.cancel")
 const changeButton = document.querySelector("#changeSource");
+const resultDiv = document.querySelector('#result');
 const resultTextDiv = document.querySelector("#text");
 const sourceLabel = document.querySelector('#sourceLabel');
 
@@ -20,6 +20,7 @@ class UI {
     this.pushButton = pushButton;
     this.changeButton = changeButton;
     this.cancelButton = cancelButton;
+    this.resultDiv = resultDiv;
     this.resultTextDiv = resultTextDiv;
     this.sourceLabel = sourceLabel;
   }
@@ -29,26 +30,19 @@ class UI {
   }
 
   changeState(stateName) {
-    if (document.getElementById(ids.states) !== null) {
-      document.getElementById(ids.states).remove();
-    }
-
-    document.head.appendChild(links.states[stateName]);
+    this.applyStyles(this.resultDiv, store.styles.states[stateName]);
   }
 
   changeConfiguration(configurationName) {
     this.sourceLabel.innerHTML = sourceLabels[configurationName];
+    this.applyStyles(this.resultTextDiv, store.styles.configurations[configurationName]);
+    this.applyStyles(this.sourceLabel, store.styles.sourceLabels[configurationName]);
+  }
 
-    if (document.getElementById(ids.configurations) !== null) {
-      document.getElementById(ids.configurations).remove();
+  applyStyles(element, styles) {
+    for (let property in styles) {
+      element.style[property] = styles[property];
     }
-
-    if (document.getElementById(ids.sourceLabels) !== null) {
-      document.getElementById(ids.sourceLabels).remove();
-    }
-
-    document.head.appendChild(links.configurations[configurationName]);
-    document.head.appendChild(links.sourceLabels[configurationName]);
   }
 }
 
