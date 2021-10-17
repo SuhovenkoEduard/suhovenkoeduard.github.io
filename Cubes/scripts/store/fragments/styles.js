@@ -24,8 +24,8 @@ const sourceLabels = {
 };
 
 const sourceLabelStrings = {
-  white: 'True random enabled',
-  black: 'True random disabled'
+  white: 'True random is enabled.',
+  black: 'True random is disabled.'
 };
 
 const styles = {
