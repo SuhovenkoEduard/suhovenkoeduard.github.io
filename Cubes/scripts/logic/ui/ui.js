@@ -23,6 +23,7 @@ class UI {
 
   changeState(stateName) {
     this.applyStyles(this.resultDiv, store.styles.states[stateName]);
+    this.applyStyles(this.pushButton, store.styles.pushButtons[stateName]);
     this.applyStyles(this.cancelButton, store.styles.cancelButtons[stateName]);
   }
 
