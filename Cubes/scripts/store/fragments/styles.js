@@ -12,10 +12,10 @@ const configurations = {
 };
 
 const cancelButtons = {
-  wait: { visibility: 'visible' },
-  success: { visibility: 'hidden' },
-  error: { visibility: 'hidden' },
-  cancel: { visibility: 'hidden' }
+  wait: { display: 'none' },
+  success: { display: 'inline-block' },
+  error: { display: 'inline-block' },
+  cancel: { display: 'inline-block' }
 };
 
 const states = {
