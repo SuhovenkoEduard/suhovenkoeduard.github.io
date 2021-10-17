@@ -11,6 +11,13 @@ const configurations = {
   }
 };
 
+const cancelButtons = {
+  wait: { visibility: 'visible' },
+  success: { visibility: 'hidden' },
+  error: { visibility: 'hidden' },
+  cancel: { visibility: 'hidden' }
+};
+
 const states = {
   wait: { background: 'yellow' },
   success: { background: 'green' },
@@ -32,7 +39,8 @@ const styles = {
   configurations,
   states,
   sourceLabels,
-  sourceLabelStrings
+  sourceLabelStrings,
+  cancelButtons
 };
 
 export default styles;
