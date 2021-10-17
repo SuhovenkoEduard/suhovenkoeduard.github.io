@@ -13,9 +13,9 @@ const configurations = {
 
 const cancelButtons = {
   wait: { display: 'none' },
-  success: { display: 'inline-block' },
-  error: { display: 'inline-block' },
-  cancel: { display: 'inline-block' }
+  success: { display: 'initial' },
+  error: { display: 'initial' },
+  cancel: { display: 'initial' }
 };
 
 const states = {
