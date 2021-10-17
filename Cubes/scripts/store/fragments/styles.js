@@ -12,10 +12,10 @@ const configurations = {
 };
 
 const cancelButtons = {
-  wait: { display: 'none' },
-  success: { display: 'initial' },
-  error: { display: 'initial' },
-  cancel: { display: 'initial' }
+  wait: { display: 'initial' },
+  success: { display: 'none' },
+  error: { display: 'none' },
+  cancel: { display: 'none' }
 };
 
 const states = {
