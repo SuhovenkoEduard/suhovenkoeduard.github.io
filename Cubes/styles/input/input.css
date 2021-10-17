@@ -23,4 +23,5 @@
   border: medium solid black;
   border-radius: 20px;
   cursor: pointer;
+  outline: none;
 }
