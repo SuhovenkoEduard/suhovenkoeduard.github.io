@@ -18,6 +18,13 @@ const cancelButtons = {
   cancel: { display: 'none' }
 };
 
+const pushButtons = {
+  wait: { display: 'none' },
+  success: { display: 'initial' },
+  error: { display: 'initial' },
+  cancel: { display: 'initial' }
+};
+
 const states = {
   wait: { background: 'yellow' },
   success: { background: 'green' },
@@ -40,7 +47,8 @@ const styles = {
   states,
   sourceLabels,
   sourceLabelStrings,
-  cancelButtons
+  cancelButtons,
+  pushButtons
 };
 
 export default styles;
