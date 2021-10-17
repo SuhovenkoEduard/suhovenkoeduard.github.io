@@ -4,33 +4,34 @@
 @import 'styles/input/input.css';
 
 * {
-    user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html, body, div.container {
-    margin: 0;
-    padding: 0;
-    height: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 div.container {
-    display: grid;
-    grid-template-rows: 100fr 5fr 100fr;
-    grid-template-columns: auto;
-    grid-template-areas:
-            "result"
-            "connection"
-            "input";
+  display: grid;
+  grid-template-rows: 100fr 5fr 100fr;
+  grid-template-columns: auto;
+  grid-template-areas:
+          "result"
+          "connection"
+          "input";
 }
 
 .result {
-    grid-area: result;
+  grid-area: result;
 }
 
 .connection {
-    grid-area: connection;
+  grid-area: connection;
 }
 
 .input {
-    grid-area: input;
+  grid-area: input;
 }
